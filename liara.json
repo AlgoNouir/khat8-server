@@ -1,0 +1,10 @@
+{
+    "platform": "django",
+    "app": "currencyno-server",
+    "disks": [
+        {
+            "name": "currencyno-server-disk",
+            "mountTo": "data"
+        }
+    ]
+}
