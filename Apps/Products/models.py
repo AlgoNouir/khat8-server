@@ -10,11 +10,15 @@ from django.db import models
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50)
+    
+    class Meta:
+        verbose_name_plural = "دسته بندی"
+    
+    name = models.CharField("نام دسته بندی", max_length=50)
     parent = models.ForeignKey(
-        "Category", null=True, blank=True, on_delete=models.CASCADE
+        "Category", null=True, blank=True, on_delete=models.CASCADE, verbose_name="دسته بندی والد"
     )
-    # havePostPrice = models.BooleanField(default=True, help_text="برای حذف هزینه پستی در این دسته بندی تیک را بردارید")
+    # havePostPrice = models.BooleanField(default=True, verbose_name="برای حذف هزینه پستی در این دسته بندی تیک را بردارید")
     
 
     def __str__(self):
@@ -37,8 +41,11 @@ DELIVERY_ENUM = [[0, "تحویل با پست"]]
 
 
 class ProdutData(models.Model):
-    name = models.CharField(max_length=50, help_text="نام ویژگی محصول")
-    amount = models.CharField(max_length=50, help_text="مقدار ویژگی محصول")
+    class Meta:
+        verbose_name_plural = "ویژگی های محصول"
+        
+    name = models.CharField(max_length=50, verbose_name="نام ویژگی محصول")
+    amount = models.CharField(max_length=50, verbose_name="مقدار ویژگی محصول")
 
     def __str__(self) -> str:
         return f"{self.name} - {self.amount}"
@@ -52,26 +59,28 @@ class ProdutData(models.Model):
 
 
 class Product(MainModel):
-    garanty = models.CharField(max_length=50, help_text="شرایط گارانتی")
-    persianName = models.CharField(max_length=50, help_text="نام فارسی محصول")
-    price = models.IntegerField(help_text="قیمت محصول")
+    class Meta:
+        verbose_name_plural = "محصولات"
+    garanty = models.CharField(max_length=50, verbose_name="شرایط گارانتی")
+    persianName = models.CharField(max_length=50, verbose_name="نام فارسی محصول")
+    price = models.IntegerField(verbose_name="قیمت محصول")
     data = models.ManyToManyField(ProdutData)
     englishName = models.CharField(
-        max_length=50, help_text="نام انگلیسی محصول")
-    desc = models.TextField(max_length=2000, help_text="توضیحات محصول")
+        max_length=50, verbose_name="نام انگلیسی محصول")
+    desc = models.TextField(max_length=2000, verbose_name="توضیحات محصول")
     original = models.BooleanField(default=False)
     deliveryType = models.IntegerField(
-        choices=DELIVERY_ENUM, help_text="نوع تحویل محصول"
+        choices=DELIVERY_ENUM, verbose_name="نوع تحویل محصول"
     )
     category = models.ForeignKey(
-        Category, on_delete=models.CASCADE, help_text="دسته بندی"
+        Category, on_delete=models.CASCADE, verbose_name="دسته بندی"
     )
     offerPrice = models.IntegerField(
-        default=0, help_text="میزان تخفیف محصول (صفر به معنای بدون تخفیف)"
+        default=0, verbose_name="میزان تخفیف محصول (صفر به معنای بدون تخفیف)"
     )
     countCanBuy = models.PositiveIntegerField(
         default=0,
-        help_text="هر کاربر به چه تعداد از این محصول می تواند بخرد؟ (صفر به معنای آزاد)",
+        verbose_name="هر کاربر به چه تعداد از این محصول می تواند بخرد؟ (صفر به معنای آزاد)",
     )
 
     def __str__(self):
@@ -86,10 +95,10 @@ class Product(MainModel):
 
 
 class KeeperCountItem(models.Model):
-    name = models.CharField(max_length=50, help_text="نام ویژگی محصول")
-    amount = models.IntegerField(help_text="مقدار ویژگی محصول")
+    name = models.CharField(max_length=50, verbose_name="نام ویژگی محصول")
+    amount = models.IntegerField(verbose_name="مقدار ویژگی محصول")
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, help_text="محصولی که این مقدار برای آن است."
+        Product, on_delete=models.CASCADE, verbose_name="محصولی که این مقدار برای آن است."
     )
 
     def __str__(self) -> str:
@@ -98,9 +107,9 @@ class KeeperCountItem(models.Model):
 
 class ProductImage(models.Model):
     image = models.CharField(
-        help_text="آدرس سرور ارائه دهنده عکس", max_length=50)
+        verbose_name="آدرس سرور ارائه دهنده عکس", max_length=50)
     product = models.ForeignKey(
-        Product, on_delete=models.CASCADE, help_text="این عکس مربوط به کدام محصول است؟"
+        Product, on_delete=models.CASCADE, verbose_name="این عکس مربوط به کدام محصول است؟"
     )
 
     def __str__(self):

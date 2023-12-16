@@ -69,6 +69,8 @@ class BaseUserManager(BUM):
 
 
 class BaseUser(MainModel, AbstractBaseUser, PermissionsMixin):
+    class Meta:
+        verbose_name_plural = "کاربران"
     phone = models.IntegerField(unique=True, verbose_name="شماره تلفن مشتری")
 
     fName = models.CharField(null=True, blank=True,
@@ -142,13 +144,14 @@ OrderStatusEnum = [[0, "در سبد خرید"], [1, "در سفارش"]]
 
 
 class CartItem(MainModel):
-    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE)
-    count = models.PositiveIntegerField()
+    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE, verbose_name="کاربر")
+    count = models.PositiveIntegerField(verbose_name="تعداد سبد خرید")
     # TODO merege this fields
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    select = models.ForeignKey(KeeperCountItem, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
+    select = models.ForeignKey(KeeperCountItem, on_delete=models.CASCADE, verbose_name="مدل انتخاب شده")
 
     class Meta:
+        verbose_name_plural = "سبد خرید"
         unique_together = ('select', 'user',)
 
 

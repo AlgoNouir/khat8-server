@@ -18,14 +18,17 @@ DONE_ENUM = [
 
 
 class Order(MainModel):
-    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE)
-    done = models.SmallIntegerField(choices=DONE_ENUM, default=0)
-    price = models.IntegerField()
-    count = models.IntegerField()
+    class Meta:
+        verbose_name_plural = "سفارشات"
+    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE, verbose_name="سفارش دهنده")
+    done = models.SmallIntegerField("وضعیت سفارش", choices=DONE_ENUM, default=0)
+    price = models.IntegerField("مبلغ سفارش")
+    count = models.IntegerField("تعداد سفارش")
     postCode = models.CharField(
+        "شماره پیگیری",
         max_length=50,
         blank=True, null=True, help_text="شماره پیگیری از اداره پست", )
-    transactionAuthCode = models.CharField(max_length=100)
+    transactionAuthCode = models.CharField("کد درگاه پرداخت", max_length=100)
 
     def __str__(self):
         return f"{self.user.lName} {self.user.fName}"
@@ -43,12 +46,12 @@ class Order(MainModel):
 
 
 class OrderItem(MainModel):
-    count = models.PositiveIntegerField()
-    price = models.IntegerField()
-    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE, verbose_name="سفارش")
+    user = models.ForeignKey(BaseUser, on_delete=models.CASCADE, verbose_name="کاربر")
+    count = models.PositiveIntegerField(verbose_name="تعداد سبد خرید")
     # TODO merege this fields
-    select = models.ForeignKey(KeeperCountItem, on_delete=models.CASCADE)
-    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, verbose_name="محصول")
+    select = models.ForeignKey(KeeperCountItem, on_delete=models.CASCADE, verbose_name="مدل انتخاب شده")
 
 
 class OrderItemSerilizer(ModelSerializer):

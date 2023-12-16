@@ -11,17 +11,12 @@ from Apps.Products.models import (
 from Apps.User.models import BaseUser, CartItem
 from Apps.Orders.models import Order, OrderItem
 
-from Apps.Fix.models import FixOrder
-from Apps.Work.models import JobOffer, JobRequest
-from Apps.Academy.models import AcademyOrder
-from Apps.Caffeh.models import CoffeeOrder
-
 admin.site.register(Category)
 admin.site.register(ProdutData)
 admin.site.register(CartItem)
 
 
-class OrderItemInline(admin.TabularInline):
+class OrderItemInline(admin.StackedInline):
     verbose_name_plural = "سفارش های آیتم"
     model = OrderItem
 
@@ -167,37 +162,3 @@ class ProductAdmin(admin.ModelAdmin):
         ),
     ]
 
-
-@admin.register(FixOrder)
-class FixOrderAdmin(admin.ModelAdmin):
-    list_filter = ["done"]
-    search_fields = ["name", "phone"]
-    list_display = ["name", "phone", "done"]
-
-
-@admin.register(CoffeeOrder)
-class CoffeeOrderAdmin(admin.ModelAdmin):
-    list_filter = ["done"]
-    search_fields = ["name", "phone"]
-    list_display = ["name", "phone", "done"]
-
-
-@admin.register(AcademyOrder)
-class AcademyOrderAdmin(admin.ModelAdmin):
-    list_filter = ["done"]
-    search_fields = ["name", "phone"]
-    list_display = ["name", "phone", "done"]
-
-
-@admin.register(JobOffer)
-class JobOfferAdmin(admin.ModelAdmin):
-    list_filter = ["done"]
-    search_fields = ["name", "phone"]
-    list_display = ["name", "phone", "done"]
-
-
-@admin.register(JobRequest)
-class JobRequestAdmin(admin.ModelAdmin):
-    list_filter = ["done"]
-    search_fields = ["name", "phone"]
-    list_display = ["name", "phone", "done"]

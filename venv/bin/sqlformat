@@ -1,4 +1,4 @@
-#!/home/nora/project/Currencyno/Currencyno_server/venv/bin/python
+#!/home/mahdinouri/Project/siso/server/venv/bin/python3.11
 # -*- coding: utf-8 -*-
 import re
 import sys

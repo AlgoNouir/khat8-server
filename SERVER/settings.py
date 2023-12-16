@@ -5,6 +5,7 @@
 # ----------------------------------------------------------------------------------+
 
 import datetime
+import os
 from pathlib import Path
 
 # ----------------------------------------------------------------------------------+
@@ -30,7 +31,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-d=v=t!s=yyho4i(r597@*28rs0m^ddjangodcsz(kjx&*@*5)s)=vv3"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 WHOAMI = "http://127.0.0.1:8000/" if DEBUG else "https://currencyno-server.iran.liara.com/"
 FRONT = "http://127.0.0.1:3000/store" if DEBUG else "https://currencyno.iran.liara.com/"
@@ -73,6 +74,57 @@ REST_FRAMEWORK = {
 #                                                                                   |
 # ----------------------------------------------------------------------------------+
 
+JAZZMIN_SETTINGS = {
+    # title of the window (Will default to current_admin_site.site_title if absent or None)
+    "site_title": "Library Admin",
+    "site_header": "Library",
+    "site_brand": "SISO",
+    "icons": {
+        "auth": "fas fa-users-cog",
+        "auth.user": "fas fa-user",
+        "auth.Group": "fas fa-users",
+    },
+    "custom_css": "main.css",
+    "copyright": "black castle forteenall",
+}
+JAZZMIN_UI_TWEAKS = {
+    "navbar_small_text": True,
+    "footer_small_text": False,
+    "body_small_text": False,
+    "brand_small_text": False,
+    "brand_colour": "navbar-indigo",
+    "accent": "accent-primary",
+    "navbar": "navbar-white navbar-light",
+    "no_navbar_border": True,
+    "navbar_fixed": False,
+    "layout_boxed": False,
+    "footer_fixed": False,
+    "sidebar_fixed": True,
+    "sidebar": "sidebar-dark-indigo",
+    "sidebar_nav_small_text": False,
+    "sidebar_disable_expand": True,
+    "sidebar_nav_child_indent": True,
+    "sidebar_nav_compact_style": True,
+    "sidebar_nav_legacy_style": False,
+    "sidebar_nav_flat_style": False,
+    "theme": "flatly",
+    "dark_mode_theme": None,
+    "button_classes": {
+        "primary": "btn-outline-primary",
+        "secondary": "btn-outline-secondary",
+        "info": "btn-info",
+        "warning": "btn-warning",
+        "danger": "btn-danger",
+        "success": "btn-success"
+    },
+    "actions_sticky_top": False
+}
+# ----------------------------------------------------------------------------------+
+#                                                                                   |
+#                                        CORS                                       |
+#                                                                                   |
+# ----------------------------------------------------------------------------------+
+
 
 ALLOWED_HOSTS = ["*"]
 
@@ -81,8 +133,6 @@ ALLOWED_HOSTS = ["*"]
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:3000",
     "http://127.0.0.1:3000",
-    "https://currencyno.com",
-    "http://currencyno.com",
 ]
 
 
@@ -104,18 +154,13 @@ MAIN_APPS = [
     "Apps.User.apps.UserConfig",
     "Apps.Products.apps.ProductsConfig",
     "Apps.Core.apps.CoreConfig",
-
-    "Apps.Fix.apps.FixConfig",
-    "Apps.Academy.apps.AcademyConfig",
-    "Apps.Work.apps.WorkConfig",
-    "Apps.Caffeh.apps.CaffehConfig",
-
     "Auth",
     "Finance"
 ]
 
 
 INSTALLED_APPS = [
+    "jazzmin",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -182,7 +227,9 @@ DATABASES = {
     }
 }
 
+
 STATIC_URL = "static/"
+STATICFILES_DIRS = ((os.path.join(BASE_DIR, "static")),)
 AUTH_USER_MODEL = "User.BaseUser"
 
 
