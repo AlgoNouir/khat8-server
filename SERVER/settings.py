@@ -76,9 +76,9 @@ REST_FRAMEWORK = {
 
 JAZZMIN_SETTINGS = {
     # title of the window (Will default to current_admin_site.site_title if absent or None)
-    "site_title": "Library Admin",
-    "site_header": "Library",
-    "site_brand": "SISO",
+    "site_title": "خط هشت ادمین",
+    "site_header": "خط هشت",
+    "site_brand": "خط هشت",
     "icons": {
         "auth": "fas fa-users-cog",
         "auth.user": "fas fa-user",
@@ -87,20 +87,21 @@ JAZZMIN_SETTINGS = {
     "custom_css": "main.css",
     "copyright": "black castle forteenall",
 }
+
 JAZZMIN_UI_TWEAKS = {
     "navbar_small_text": True,
     "footer_small_text": False,
     "body_small_text": False,
     "brand_small_text": False,
-    "brand_colour": "navbar-indigo",
-    "accent": "accent-primary",
-    "navbar": "navbar-white navbar-light",
+    "brand_colour": "navbar-lightblue",
+    "accent": "accent-lightblue",
+    "navbar": "navbar-light",
     "no_navbar_border": True,
     "navbar_fixed": False,
     "layout_boxed": False,
     "footer_fixed": False,
     "sidebar_fixed": True,
-    "sidebar": "sidebar-dark-indigo",
+    "sidebar": "sidebar-dark-lightblue",
     "sidebar_nav_small_text": False,
     "sidebar_disable_expand": True,
     "sidebar_nav_child_indent": True,
@@ -153,6 +154,7 @@ MAIN_APPS = [
     "Apps.Orders.apps.OrdersConfig",
     "Apps.User.apps.UserConfig",
     "Apps.Products.apps.ProductsConfig",
+    "Apps.Books.apps.BooksConfig",
     "Apps.Core.apps.CoreConfig",
     "Auth",
     "Finance"
