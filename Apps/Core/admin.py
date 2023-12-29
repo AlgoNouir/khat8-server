@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin import widgets
 from django.contrib.auth.admin import UserAdmin
+from Apps.Books.models import Books
 from Apps.Products.models import (
     Product,
     Category,
@@ -28,6 +29,14 @@ class OrderAdmin(admin.ModelAdmin):
     list_display = ["id", "user", "price", "count", "done"]
     readonly_fields = ('id',)
     inlines = [OrderItemInline]
+
+
+@admin.register(Books)
+class BookAdmin(admin.ModelAdmin):
+    list_filter = ["mobNo"]
+    search_fields = ["name", "mobNo"]
+    list_display = ["pk", "name", "mobNo"]
+    readonly_fields = ('id',"name", "mobNo")
 
 
 @admin.register(BaseUser)
@@ -92,9 +101,8 @@ class KeeperCountItemInline(admin.TabularInline):
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin):
-    list_filter = ["original"]
     search_fields = ["persianName"]
-    list_display = ["persianName", "original", "price", "offerPrice"]
+    list_display = ["persianName", "price", "offerPrice"]
     inlines = [ProductImagesInline, KeeperCountItemInline]
     filter_horizontal = ('data',)
 
@@ -115,7 +123,6 @@ class ProductAdmin(admin.ModelAdmin):
                     "persianName",
                     "englishName",
                     "desc",
-                    "original",
                     "data",
                 ),
             },
@@ -128,7 +135,6 @@ class ProductAdmin(admin.ModelAdmin):
                     "deliveryType",
                     "countCanBuy",
                     "offerPrice",
-                    "garanty",
                 ),
             },
         ),
@@ -143,7 +149,6 @@ class ProductAdmin(admin.ModelAdmin):
                     "persianName",
                     "englishName",
                     "desc",
-                    "original",
                     "data",
                 ),
             },
@@ -156,7 +161,6 @@ class ProductAdmin(admin.ModelAdmin):
                     "deliveryType",
                     "countCanBuy",
                     "offerPrice",
-                    "garanty",
                 ),
             },
         ),

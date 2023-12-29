@@ -61,14 +61,12 @@ class ProdutData(models.Model):
 class Product(MainModel):
     class Meta:
         verbose_name_plural = "محصولات"
-    garanty = models.CharField(max_length=50, verbose_name="شرایط گارانتی")
     persianName = models.CharField(max_length=50, verbose_name="نام فارسی محصول")
     price = models.IntegerField(verbose_name="قیمت محصول")
     data = models.ManyToManyField(ProdutData)
     englishName = models.CharField(
         max_length=50, verbose_name="نام انگلیسی محصول")
     desc = models.TextField(max_length=2000, verbose_name="توضیحات محصول")
-    original = models.BooleanField(default=False)
     deliveryType = models.IntegerField(
         choices=DELIVERY_ENUM, verbose_name="نوع تحویل محصول"
     )
