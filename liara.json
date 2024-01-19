@@ -1,9 +1,9 @@
 {
     "platform": "django",
-    "app": "currencyno-server",
+    "app": "siso-server",
     "disks": [
         {
-            "name": "currencyno-server-disk",
+            "name": "siso-server-disk",
             "mountTo": "data"
         }
     ]

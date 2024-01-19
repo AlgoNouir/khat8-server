@@ -64,7 +64,7 @@ class OrdersView(APIView):
                 orderItem.save()
                 cartItem.delete()
             order.save()
-            api = Api("09145970504", 'BG!RA')
+            api = Api("09210102710", 'EA!ROA0')
             sms_soap = api.sms('soap')
             res = sms_soap.send_by_base_number(
                 [str(order.pk)], f"0{user.phone}", 151605)

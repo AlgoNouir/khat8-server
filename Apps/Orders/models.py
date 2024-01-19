@@ -38,7 +38,7 @@ class Order(MainModel):
         if self.done > 0 and self.postCode != None:
             print("ok i got data")
 
-            api = Api("09145970504", 'BG!RA')
+            api = Api("09210102710", 'EA!ROA0')
             sms_soap = api.sms('soap')
             res = sms_soap.send_by_base_number(
                 f"{str(self.pk)};{str(self.postCode)}", f"0{self.user.phone}", 151607)

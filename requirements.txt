@@ -6,16 +6,20 @@ asyncio==3.4.3
 attrs==23.1.0
 certifi==2023.5.7
 charset-normalizer==3.2.0
+distlib==0.3.8
 Django==4.2.3
 django-cors-headers==4.1.0
+django-jazzmin==2.6.0
 django-merchant==0.2
 djangorestframework==3.14.0
 djangorestframework-simplejwt==5.2.2
+filelock==3.13.1
 frozenlist==1.4.0
 idna==3.4
 isodate==0.6.1
 lxml==4.9.3
 multidict==6.0.4
+pipenv==2023.11.15
 platformdirs==3.9.1
 PyJWT==2.7.0
 pytz==2023.3
@@ -27,5 +31,6 @@ sqlparse==0.4.4
 suds==1.1.2
 typing_extensions==4.7.1
 urllib3==2.0.3
+virtualenv==20.25.0
 yarl==1.9.2
 zeep==4.2.1
